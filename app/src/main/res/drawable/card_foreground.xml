@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+       android:drawable="@drawable/card_foreground_selector"
+       android:insetLeft="@dimen/card_elevation"
+       android:insetRight="@dimen/card_elevation"
+       android:insetTop="@dimen/card_elevation_plus"
+       android:insetBottom="@dimen/card_elevation_plus"/>
+
