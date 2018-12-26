@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
+
     defaultConfig {
         applicationId "com.wiseyq.shadowbtn"
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,8 +19,43 @@ android {
     }
 }
 
+def getAndroidJar = {
+    def androidSdkHome = System.env.ANDROID_HOME as String
+    if (!androidSdkHome) {
+        def file = rootProject.file('local.properties')
+        if (file.exists()) {
+            Properties properties = new Properties()
+            file.withInputStream { properties.load(it) }
+            androidSdkHome = properties['sdk.dir']
+        }
+    }
+    if (!androidSdkHome) {
+        throw new StopExecutionException("Please declares your 'sdk.dir' to file 'local.properties'")
+    }
+    return "$androidSdkHome/platforms/$android.compileSdkVersion/android.jar"
+}
+
+task providedActivityThread(type: JavaCompile) {
+    source = file("src/provided/java")
+    println getAndroidJar()
+    classpath = files(getAndroidJar())
+    destinationDir = file(project.buildDir.toString() + '/tmp/stubLibs')
+    options.verbose = true
+}
+
+task providedActivityThreadJar(type: Jar) {
+    baseName = 'provided-activity-thread'
+    version = '1.0'
+    from(providedActivityThread)
+    include('**/*.class')
+}
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile "com.android.support:cardview-v7:25.3.1"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation "com.android.support:cardview-v7:28.0.0"
+    // Provided android.jar for hidden apis
+    compileOnly providedActivityThreadJar.outputs.files
+
+//    implementation 'com.anggrayudi:android-hidden-api:28.0'
 }

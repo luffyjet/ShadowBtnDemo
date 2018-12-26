@@ -3,7 +3,7 @@
  *
  */
 
-package com.wiseyq.shadowbtn;
+package com.wiseyq.shadowbtn.context;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityThread;
