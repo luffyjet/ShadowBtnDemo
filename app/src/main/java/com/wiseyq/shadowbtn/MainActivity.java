@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private View drawView1, drawView2, selectorView;
     int normalColor = Color.parseColor("#959595");
     int enableColor = Color.parseColor("#ff9b1a");
@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initShadow() {
-        ShadowUtil.setShadowBg(drawView1,normalColor,normalColor,cornerSize,shadowSize,shadowSize);
-        ShadowUtil.setShadowBg(drawView2,enableColor,enableColor,cornerSize,shadowSize,shadowSize);
-        ShadowUtil.setShadowSelectorBg(selectorView,normalColor,enableColor,normalColor,enableColor,cornerSize,shadowSize,shadowSize);
+        ShadowUtil.setShadowBg(drawView1, normalColor, normalColor, cornerSize, shadowSize, shadowSize);
+        ShadowUtil.setShadowBg(drawView2, enableColor, enableColor, cornerSize, shadowSize, shadowSize);
+        ShadowUtil.setShadowSelectorBg(selectorView, normalColor, enableColor, normalColor, enableColor, cornerSize, shadowSize, shadowSize);
     }
 
 
@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.relay_draw3:
 
+                break;
+            default:
                 break;
         }
     }
